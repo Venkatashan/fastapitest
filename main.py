@@ -52,7 +52,8 @@ def greet():
 
 # Get Posts
 @app.get("/posts", dependencies=[Depends(JWTBearer())],tags=["posts"])
-def get_posts():
+def get_posts(data:PostSchema):
+    posts.append(data)
     return { "data": posts }
 
 
