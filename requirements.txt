@@ -1,5 +1,4 @@
 python-decouple
-jwt
 uvicorn
 PyJWT
 pydantic
