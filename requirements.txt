@@ -1,0 +1,11 @@
+python-decouple
+jwt
+uvicorn
+pydantic
+fastapi.security
+fastapi
+email-validator
+asyncpg
+click
+gunicorn
+httptools
