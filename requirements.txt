@@ -1,6 +1,7 @@
 python-decouple
 jwt
 uvicorn
+PyJWT
 pydantic
 fastapi.security
 fastapi
