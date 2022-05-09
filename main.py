@@ -50,14 +50,7 @@ def greet():
     return {"hello": "world!."}
 
 
-# Get Posts
-@app.get("/posts", dependencies=[Depends(JWTBearer())],tags=["posts"])
-def get_posts(data:PostSchema):
-    posts.append(data)
-    return { "data": posts }
-
-
-@app.get("/posts/{id}", dependencies=[Depends(JWTBearer())], tags=["posts"])
+@app.get("/scim/v1/Users/{id}", dependencies=[Depends(JWTBearer())], tags=["posts"])
 def get_single_post(id: int):
     if id > len(posts):
         return {
@@ -71,7 +64,7 @@ def get_single_post(id: int):
             }
 
 
-@app.post("/posts", dependencies=[Depends(JWTBearer())], tags=["posts"])
+@app.post("/scim/v1/Users", dependencies=[Depends(JWTBearer())], tags=["posts"])
 def add_post(post: PostSchema):
     post.id = len(posts) + 1
     posts.append(post.dict())
@@ -80,13 +73,13 @@ def add_post(post: PostSchema):
     }
 
 
-@app.post("/user/signup", tags=["user"])
+@app.post("/scim/token", tags=["user"])
 def create_user(user: UserSchema = Body(...)):
     users.append(user) # replace with db call, making sure to hash the password first
     return signJWT(user.email)
 
 
-@app.post("/user/login", tags=["user"])
+@app.post("/scim/login", tags=["user"])
 def user_login(user: UserLoginSchema = Body(...)):
     if check_user(user):
         return signJWT(user.email)
