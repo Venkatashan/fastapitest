@@ -14,31 +14,7 @@ from auth_bearer import JWTBearer
 
 app = FastAPI()
 
-db: List[User]=[
-    User(id = UUID("434f46a1-bfb6-4e98-8a8d-ca7049909f7c"),
-    businessPhones=["+1 412 555 0109"],
-    displayName="Megan Bowen",
-    givenName="Megan",
-    jobTitle="Auditor",
-    mail="MeganB@M365x214355.onmicrosoft.com",
-    mobilePhone="123 456 789",
-    officeLocation="12/1110",
-    preferredLanguage="en-US",
-    surname="Bowen",
-    userPrincipalName="MeganB@M365x214355.onmicrosoft.com"),
-
-    User(id=UUID("c9807ff6-cc54-4034-9c74-df1cb2e69b06"),
-         businessPhones=["+1 412 555 01026"],
-         displayName="Venkat Krish",
-         givenName="Venkat",
-         jobTitle="Auditor",
-         mail="VenkatK@M365x214355.onmicrosoft.com",
-         mobilePhone="123 456 000",
-         officeLocation="15/1111",
-         preferredLanguage="en-US",
-         surname="Krish",
-         userPrincipalName="venkatK@M365x214355.onmicrosoft.com")
-]
+db: List[User]=[]
 
 def check_user(user: UserLoginSchema):
     for user in user:
@@ -48,7 +24,7 @@ def check_user(user: UserLoginSchema):
 
 @app.post("/scim/Token")
 async def signup_user(user: UserLoginSchema):
-    db.append(user) # replace with db call, making sure to hash the password first
+    #db.append(user) # replace with db call, making sure to hash the password first
     return signJWT(user.id)
 
 @app.post("/scim/v2/Users/login")
