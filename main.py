@@ -41,7 +41,8 @@ async def read_root():
 
 @app.get("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def fetch_users():
-    return db
+    #return db
+    return "Testing"
 
 @app.post("/scim/v2/Users")
 async def create_user(user:User):
