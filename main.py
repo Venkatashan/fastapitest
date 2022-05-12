@@ -10,6 +10,7 @@ from fastapi_jwt_auth import AuthJWT
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from pydantic import BaseModel
 from auth_handler import signJWT
+from auth_bearer import JWTBearer
 
 app = FastAPI()
 
@@ -62,7 +63,7 @@ async def read_root():
     return {"Hello": "Venkat"}
 
 
-@app.get("/scim/v2/Users")
+@app.get("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def fetch_users():
     return db
 
