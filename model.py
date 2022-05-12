@@ -1,43 +1,53 @@
 from pydantic import BaseModel, Field, EmailStr
 
-class PostSchema(BaseModel):
-
-    id: int = Field(default=None)
-    title: str = Field(...)
-    content: str = Field(...)
-
-    class Config:
-        schema_extra = {
-            "example": {
-                "title": "Securing FastAPI applications with JWT.",
-                "content": "In this tutorial, you'll learn how to secure your application by enabling authentication using JWT. We'll be using PyJWT to sign, encode and decode JWT tokens...."
-            }
-        }
-
-
 class UserSchema(BaseModel):
 
-    fullname: str = Field(...)
-    email: EmailStr = Field(...)
-    password: str = Field(...)
+    id: int = Field(default=None)
+    externalId:str = Field(default=None)
+    meta:str= Field(default=None)
+    businessPhones : str = Field(...)
+    userName : str = Field(...)
+    displayName:str = Field(...)
+    givenName:str = Field(...)
+    jobTitle:str = Field(...)
+    mail:str = Field(...)
+    mobilePhone:str = Field(...)
+    officeLocation:str = Field(...)
+    preferredLanguage:str = Field(...)
+    surname:str = Field(...)
+    userPrincipalName:str = Field(...)
 
     class Config:
         schema_extra = {
             "example": {
-                "fullname": "Abdulazeez Abdulazeez Adeshina",
-                "email": "abdulazeez@x.com",
-                "password": "weakpassword"
+                "id": 4,
+                "externalId": "userext",
+                "meta": "TestMetta",
+                "businessPhones": "044284789",
+                "userName": "TestSCIM",
+                "displayName": "TestScimAPI",
+                "givenName": "TestSCIMuser",
+                "jobTitle": "scimendpoint",
+                "mail": "scimendpoint@.onmicrosoft.com",
+                "mobilePhone": "1234567890",
+                "officeLocation": "ind",
+                "preferredLanguage": "eng",
+                "surname":"endpoint",
+                "userPrincipalName": "scimendpoint@M365x214355.onmicrosoft.com"
             }
         }
 
+
 class UserLoginSchema(BaseModel):
-    email: EmailStr = Field(...)
-    password: str = Field(...)
+
+    userName : str = Field(...)
+    mail: str = Field(...)
+
 
     class Config:
         schema_extra = {
             "example": {
-                "email": "abdulazeez@x.com",
-                "password": "weakpassword"
+                "userName": "scimendpoint azureAD",
+                "mail": "scimendpointazuread@x.com",
             }
         }
