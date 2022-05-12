@@ -101,7 +101,7 @@ def add_post(post: UserSchema):
         "data": "post added."
     }
 
-@app.get("/scim/v2/Users/{id}", dependencies=[Depends(JWTBearer())], tags=["posts"])
+@app.get("/scim/v2/Users/", tags=["posts"])
 def get_single_post(id: int):
     if id > len(posts):
         return {
