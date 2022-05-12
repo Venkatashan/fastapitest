@@ -39,7 +39,7 @@ async def read_root():
     return {"Hello": "Venkat"}
 
 
-@app.get("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
+#@app.get("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def fetch_users():
     #return db
 
