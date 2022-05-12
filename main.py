@@ -14,7 +14,7 @@ from auth_bearer import JWTBearer
 
 app = FastAPI()
 
-db: List[User]=[]
+db: List[User]= []
 
 def check_user(user: UserLoginSchema):
     for user in user:
@@ -36,16 +36,41 @@ def user_login(user: UserLoginSchema):
     }
 @app.get("/")
 async def read_root():
-    return {"Hello": "Venkat"}
+    return db
 
-
-#@app.get("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
+@app.get("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def fetch_users():
     #return db
+    user_schema = {
+        "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User",
+                    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+                    "urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User"],
+        "userName": "bjensen@testuser.com",
+        "id": "48af03ac28ad4fb88478",
+        "externalId": "bjensen",
+        "name": {
+            "familyName": "Jensen",
+            "givenName": "Barbara"
+        },
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+            "Manager": "123456"
+        },
+        "urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User": {
+            "tag": "701984",
+        },
+        "meta": {
+            "resourceType": "User",
+            "created": "2010-01-23T04:56:22Z",
+            "lastModified": "2011-05-13T04:42:34Z",
+            "version": "W\/\"3694e05e9dff591\"",
+            "location":
+                "https://example.com/v2/Users/2819c223-7f76-453a-919d-413861904646"
+        }
+    }
 
-    return 200
+    return user_schema
 
-@app.post("/scim/v2/Users")
+@app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def create_user(user:User):
     db.append(user)
     return {"id":user.id}
