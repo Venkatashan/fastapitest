@@ -45,23 +45,15 @@ async def fetch_users():
     "schemas": [
         "urn:ietf:params:scim:schemas:core:2.0:User",
         "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"],
-    "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
-    "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
     "active": True,
-    "emails": [{
-        "primary": True,
-        "type": "work",
-        "value": "Test_User_fd0ea19b-0777-472c-9f96-4f70d2226f2e@testuser.com"
-    }],
-    "meta": {
-        "resourceType": "User"
-    },
-    "name": {
-        "formatted": "givenName familyName",
-        "familyName": "familyName",
-        "givenName": "givenName"
-    },
-    "roles": []
+    "displayName":"",
+    "preferredLanguage":"",
+    "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
+    "namegivenName":"Test_User",
+    "namefamilyName":"Test_User",
+    "nameformatted":"Test_User",
+    "ReportableIdentifier":"Test_User",
+    "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef"
 }
     return user_schema
 
