@@ -48,40 +48,43 @@ async def fetch_users():
     "active": True,
     "displayName":"",
     "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
-    "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef"
+    "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
+    "email":"venakat@outlook.com"
 }
     return user_schema
 
 @app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def create_user(user:User):
     db.append(user)
-    return {"id":user.externalId}
+    return {"externalId":user.externalId}
 
-@app.delete("/scim/v2/Users/{id}")
-async def delete_user(user_id:UUID):
+@app.delete("/scim/v2/Users/{externalId}",dependencies=[Depends(JWTBearer())])
+async def delete_user(externalId):
     for user in db:
-        if user.externalId==user_id:
+        if user.externalId==externalId:
             db.remove(user)
             return
     raise HTTPException(
         status_code=404,
-        detail=f"user with id: {user_id} does not exist"
+        detail=f"user with id: {externalId} does not exist"
     )
 
-@app.put("scim/v2/Users/{id}")
-async def update_user(user_update:UserUpdateRequest,user_id:UUID):
+@app.put("scim/v2/Users/{externalId}",dependencies=[Depends(JWTBearer())])
+async def update_user(user_update:UserUpdateRequest,externalId:str):
     for user in db:
-        if user.externalId==user_id:
-            if user_update.businessPhones is not None:
-                user.businessPhones = user_update.businessPhones
-            if user_update.mobilePhone is not None:
-                user.mobilePhone = user_update.mobilePhone
-            if user_update.officeLocation is not None:
-                user.officeLocation = user_update.officeLocation
-            if user_update.jobTitle is not None:
-                user.jobTitle = user_update.jobTitle
-            return
+        if user.externalId == externalId:
+            if user_update.displayName is not None:
+                user.displayName = user_update.displayName+" Updated"
+            #if user_update.businessPhones is not None:
+            #    user.businessPhones = user_update.businessPhones
+            #if user_update.mobilePhone is not None:
+            #    user.mobilePhone = user_update.mobilePhone
+            #if user_update.officeLocation is not None:
+            #    user.officeLocation = user_update.officeLocation
+            #if user_update.jobTitle is not None:
+            #    user.jobTitle = user_update.jobTitle
+            return user.displayName
     raise HTTPException(
         status_code=404,
-        detail=f"user with id: {user_id} does not exist"
+        detail=f"user with id: {externalId} does not exist"
     )

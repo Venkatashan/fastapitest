@@ -8,14 +8,17 @@ class User(BaseModel):
     displayName:str
     userName: str
     externalId:str
+    email:str
 
     #phoneNumbers:list=[{"value":value,"type":type}]
 
 class UserUpdateRequest(BaseModel):
-    businessPhones: list
-    jobTitle: str
-    mobilePhone: str
-    officeLocation: str
+    schemas:list
+    active: bool
+    displayName:str
+    userName: str
+    externalId:str
+    email:str
 
 class UserLoginSchema(BaseModel):
     externalId:str
