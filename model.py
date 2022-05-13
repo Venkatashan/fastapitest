@@ -4,15 +4,9 @@ from pydantic import BaseModel
 
 class User(BaseModel):
     schemas:list
-    id:str
     active: bool
     displayName:str
-    preferredLanguage:str
     userName: str
-    namegivenName:str
-    namefamilyName:str
-    nameformatted:str
-    reportableIdentifier:str
     externalId:str
 
     #phoneNumbers:list=[{"value":value,"type":type}]
@@ -24,5 +18,5 @@ class UserUpdateRequest(BaseModel):
     officeLocation: str
 
 class UserLoginSchema(BaseModel):
-    id:str
+    externalId:str
     password:str
