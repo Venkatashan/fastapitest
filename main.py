@@ -45,6 +45,7 @@ async def fetch_users():
     "schemas": [
         "urn:ietf:params:scim:schemas:core:2.0:User",
         "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"],
+    "id":"dsdsdsdsd",
     "active": True,
     "displayName":"",
     "preferredLanguage":"",
@@ -52,7 +53,7 @@ async def fetch_users():
     "namegivenName":"Test_User",
     "namefamilyName":"Test_User",
     "nameformatted":"Test_User",
-    "ReportableIdentifier":"Test_User",
+    "reportableIdentifier":"Test_User",
     "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef"
 }
     return user_schema

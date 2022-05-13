@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 class User(BaseModel):
     schemas:list
+    id:str
     active: bool
     displayName:str
     preferredLanguage:str
@@ -11,7 +12,7 @@ class User(BaseModel):
     namegivenName:str
     namefamilyName:str
     nameformatted:str
-    ReportableIdentifier:str
+    reportableIdentifier:str
     externalId:str
 
     #phoneNumbers:list=[{"value":value,"type":type}]
