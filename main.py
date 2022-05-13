@@ -42,32 +42,27 @@ async def read_root():
 async def fetch_users():
     #return db
     user_schema = {
-        "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User",
-                    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
-                    "urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User"],
-        "userName": "bjensen@testuser.com",
-        "id": "48af03ac28ad4fb88478",
-        "externalId": "bjensen",
-        "name": {
-            "familyName": "Jensen",
-            "givenName": "Barbara"
-        },
-        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
-            "Manager": "123456"
-        },
-        "urn:ietf:params:scim:schemas:extension:CustomExtensionName:2.0:User": {
-            "tag": "701984",
-        },
-        "meta": {
-            "resourceType": "User",
-            "created": "2010-01-23T04:56:22Z",
-            "lastModified": "2011-05-13T04:42:34Z",
-            "version": "W\/\"3694e05e9dff591\"",
-            "location":
-                "https://example.com/v2/Users/2819c223-7f76-453a-919d-413861904646"
-        }
-    }
-
+    "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:User",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"],
+    "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
+    "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
+    "active": True,
+    "emails": [{
+        "primary": True,
+        "type": "work",
+        "value": "Test_User_fd0ea19b-0777-472c-9f96-4f70d2226f2e@testuser.com"
+    }],
+    "meta": {
+        "resourceType": "User"
+    },
+    "name": {
+        "formatted": "givenName familyName",
+        "familyName": "familyName",
+        "givenName": "givenName"
+    },
+    "roles": []
+}
     return user_schema
 
 @app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])

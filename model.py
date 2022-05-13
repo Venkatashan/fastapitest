@@ -3,10 +3,15 @@ from uuid import UUID,uuid4
 from pydantic import BaseModel
 
 class User(BaseModel):
-    id:str
-    userName:str
+    schemas:list
     externalId:str
-
+    userName: str
+    active:bool
+    emails: list
+    meta: dict
+    name: dict
+    roles:list
+    #phoneNumbers:list=[{"value":value,"type":type}]
 
 class UserUpdateRequest(BaseModel):
     businessPhones: list
