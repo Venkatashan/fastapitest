@@ -4,13 +4,16 @@ from pydantic import BaseModel
 
 class User(BaseModel):
     schemas:list
-    externalId:str
+    active: bool
+    displayName:str
+    preferredLanguage:str
     userName: str
-    active:bool
-    emails: list
-    meta: dict
-    name: dict
-    roles:list
+    namegivenName:str
+    namefamilyName:str
+    nameformatted:str
+    ReportableIdentifier:str
+    externalId:str
+
     #phoneNumbers:list=[{"value":value,"type":type}]
 
 class UserUpdateRequest(BaseModel):
