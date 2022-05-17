@@ -49,8 +49,11 @@ async def fetch_users():
     "displayName":"",
     "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
     "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
-    "email":"venakat@outlook.com"
-}
+    "firstName":"venakat",
+    "lastName":"krish",
+    "jobTitle":"Dev",
+    "department":"cse"
+    }
     return user_schema
 
 @app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
