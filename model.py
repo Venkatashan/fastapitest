@@ -8,10 +8,6 @@ class User(BaseModel):
     displayName:str
     userName: str
     externalId:str
-    firstName:str
-    lastName: str
-    jobTitle: str
-    department: str
 
     #phoneNumbers:list=[{"value":value,"type":type}]
 
