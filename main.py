@@ -38,9 +38,8 @@ def user_login(user: UserLoginSchema):
 async def read_root():
     return db
 
-@app.get("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
-async def fetch_users():
-    #return db
+@app.get("/scim/v2/Schemas",dependencies=[Depends(JWTBearer())])
+async def fetch_users_schema():
     user_schema = {
     "schemas": [
         "urn:ietf:params:scim:schemas:core:2.0:User",
@@ -51,6 +50,14 @@ async def fetch_users():
     "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
     }
     return user_schema
+@app.get("/scim/v2/Users/{externalId}",dependencies=[Depends(JWTBearer())])
+async def fetch_users(externalId):
+    for user in db:
+        if user.externalId == externalId:
+            return user
+    else:
+        detail = f"user with id: {externalId} does not exist"
+        return detail
 
 @app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def create_user(user:User):
