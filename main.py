@@ -56,8 +56,16 @@ async def fetch_users(externalId):
         if user.externalId == externalId:
             return user
     else:
-        detail = f"user with id: {externalId} does not exist"
-        return detail
+        user_schema = {
+            "schemas": [
+                "urn:ietf:params:scim:schemas:core:2.0:User",
+                "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"],
+            "active": True,
+            "displayName": "",
+            "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
+            "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
+        }
+        return user_schema
 
 @app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def create_user(user:User):
