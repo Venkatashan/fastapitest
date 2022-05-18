@@ -55,7 +55,7 @@ async def fetch_users():
 @app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def create_user(user:User):
     db.append(user)
-    return {"externalId":user.externalId}
+    return {"Id":user.externalId}
 
 @app.delete("/scim/v2/Users/{externalId}",dependencies=[Depends(JWTBearer())])
 async def delete_user(externalId):
