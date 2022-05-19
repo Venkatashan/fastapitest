@@ -38,25 +38,9 @@ def user_login(user: UserLoginSchema):
 async def read_root():
     return db
 
-@app.get("/scim/v2/Schemas",dependencies=[Depends(JWTBearer())])
-async def fetch_users_schema():
+@app.get("/scim/v2/Users/",dependencies=[Depends(JWTBearer())])
+async def fetch_users():
     user_schema = {
-    "schemas": [
-        "urn:ietf:params:scim:schemas:core:2.0:User",
-        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"],
-    "active": True,
-    "displayName":"",
-    "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
-    "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
-    }
-    return user_schema
-@app.get("/scim/v2/Users/{externalId}",dependencies=[Depends(JWTBearer())])
-async def fetch_users(externalId):
-    for user in db:
-        if user.externalId == externalId:
-            return user
-    else:
-        user_schema = {
             "schemas": [
                 "urn:ietf:params:scim:schemas:core:2.0:User",
                 "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"],
@@ -65,7 +49,7 @@ async def fetch_users(externalId):
             "userName": "Test_User_ab6490ee-1e48-479e-a20b-2d77186b5dd1",
             "externalId": "0a21f0f2-8d2a-4f8e-bf98-7363c4aed4ef",
         }
-        return user_schema
+    return user_schema
 
 @app.post("/scim/v2/Users",dependencies=[Depends(JWTBearer())])
 async def create_user(user:User):
